@@ -26,15 +26,15 @@ let sleepData = (await dbQuery(`
 
 drawGoogleChart({
   type: 'ColumnChart',
-  data: makeChartFriendly(sleepData, 'Sömnmängd', `% Depression`),
+  data: makeChartFriendly(sleepData, 'Sleep Duration', `% Depression`),
   options: {
     height: 500,
     width: 1250,
-    chartArea: { left: 50 },
+    chartArea: { left: 100, width: '75%' }, // Flyttar diagrammet åt höger
     vAxis: { format: '#\'%\'', title: 'Percentage with depression', minValue: 0, maxValue: 100 },
     hAxis: { title: 'Sleep Duration', slantedText: false },
-    title: `Depression in relation to sleep Duration (without "Others").
-Students who sleep less than 5 hours tend to become more depressed.`,
+    title: `Depression in relation to sleep duration (without "Others"). 
+    Students who sleep Less than 5 hours tend to become more depressed.`,
     colors: ['#00a1f1']
   }
 });
