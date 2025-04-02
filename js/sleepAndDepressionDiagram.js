@@ -34,7 +34,7 @@ drawGoogleChart({
     vAxis: { format: '#\'%\'', title: 'Percentage with depression', minValue: 0, maxValue: 100 },
     hAxis: { title: 'Sleep Duration', slantedText: false },
     title: `Depression in relation to sleep duration (without "Others"). 
-    Students who sleep Less than 5 hours tend to become more depressed.`,
+      Students who sleep Less than 5 hours tend to become more depressed.`,
     colors: ['#00a1f1']
   }
 });
