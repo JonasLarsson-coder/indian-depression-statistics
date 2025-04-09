@@ -1,1 +1,0 @@
-addMdToPage('## Survey info')
