@@ -1,3 +1,5 @@
+
+
 createMenu('Indian depression statistics', [
   { name: 'Average Age', script: 'avgAge.js' },
   { name: 'Suicidal', script: 'suicidalThoughtsAndDepression.js' },
