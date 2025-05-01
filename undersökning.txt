@@ -1,0 +1,16 @@
+
+
+Undersök olika samband/variabler påverkar deprission för ohälsa bland studenter i indien.
+
+*Vad har sömn för påverkan? finns det någon korrelation mellen sömmn och depression?
+
+*finns det någon korrelation mellan academic pressure och depression?
+
+*Hur påverkar "financial stress" studenternas hälsa?
+
+skriv en kort text som sammanfattar varje undersökning. Visualisera med tabell, diagram, trendlinje samt R^2-värde eller Pearson test.
+avsluta med vad resultatet/diagramen säger.
+
+OBS, skapa minst en dropdown-menu där man kan göra olika val och få fram resultat.
+
+*Skapa även en ny sida som sammanfattar de olika underökningarna. bevisas eller motbevisas det?
