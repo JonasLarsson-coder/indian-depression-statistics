@@ -32,12 +32,12 @@ let sleepData = (await dbQuery(`
 `)).map(x => ({ ...x, sleepDuration: x.sleepDuration }));
 
 drawGoogleChart({
-  type: 'PieChart',
+  type: 'ColumnChart',
   data: makeChartFriendly(sleepData, 'Sleep Duration', `% Depression`),
   options: {
     height: 500,
     width: 1250,
-    chartArea: { left: 100, width: '75%' }, 
+    chartArea: { left: 100, width: '75%' },
     vAxis: { format: '#\'%\'', title: 'Percentage with depression', minValue: 0, maxValue: 100, },
     hAxis: { title: 'Sleep Duration', slantedText: false },
     title: `Depression in relation to sleep duration (without "Others"). 
