@@ -37,7 +37,7 @@ drawGoogleChart({
   options: {
     height: 500,
     width: 1250,
-    chartArea: { left: 100, width: '75%' }, // Flyttar diagrammet åt höger
+    chartArea: { left: 100, width: '75%' }, 
     vAxis: { format: '#\'%\'', title: 'Percentage with depression', minValue: 0, maxValue: 100, },
     hAxis: { title: 'Sleep Duration', slantedText: false },
     title: `Depression in relation to sleep duration (without "Others"). 

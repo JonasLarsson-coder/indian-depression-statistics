@@ -22,7 +22,7 @@ GROUP BY suicidalThoughts, depression_status;
 tableFromData({ data: suicidalDepressionData })
 
 
-// Lägg till rubrik på sidan
+
 
 
 try {
