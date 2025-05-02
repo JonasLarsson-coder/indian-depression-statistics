@@ -46,7 +46,7 @@ drawGoogleChart({
     hAxis: { title: 'Kön' },
     vAxis: { title: 'Värde' },
     legend: { position: 'top' },
-    width: 1400,  // Ändra bredd
-    height: 600  // Ändra höjd
+    width: 1500,  // Ändra bredd
+    height: 800  // Ändra höjd
   }
 });
