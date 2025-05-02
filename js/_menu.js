@@ -7,4 +7,5 @@ createMenu('Indian depression statistics', [
   { name: 'Sleep', script: 'sleepAndDepressionDiagram.js' },
   { name: 'Mentall Illnes', script: 'historyOfMentallIllnesAndDepression.js' },
   { name: 'test', script: 'test.js' },
+  { name: 'Financial Stress', script: 'financialStress.js' }
 ]);
