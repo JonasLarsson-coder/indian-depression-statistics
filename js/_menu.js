@@ -6,6 +6,6 @@ createMenu('Indian depression statistics', [
   { name: 'Självmordstankar', script: 'suicidalThoughtsAndDepression.js' },
   { name: 'Sömn', script: 'sleepAndDepressionDiagram.js' },
   { name: 'Familjehistorik av psykisk ohälsa', script: 'historyOfMentallIllnesAndDepression.js' },
-  { name: 'test', script: 'test.js' },
-  { name: 'Ekonomisk Stress', script: 'financialStress.js' }
+  { name: 'Ekonomisk Stress', script: 'financialStress.js' },
+  { name: 'Sammanfattning', script: 'sammanfattning.js' }
 ]);
