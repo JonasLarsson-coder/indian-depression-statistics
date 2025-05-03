@@ -1,4 +1,4 @@
 import addMdToPage from './libs/addMdToPage.js';
 
-addMdToPage('## Introduction')
-addMdToPage('En undersökning för att se om det finns några samband/korrelation mellan olika variabler gällaande psykisk ohälsa bland studenter i Indien. Deltagarna var mellan 18 och 39 år.Den här texten är inte färdig!')
+addMdToPage('## Intro')
+addMdToPage('Statistik för psykisk ohälsa bland studenter i Indien. Hur mår dom?  I undersökningen svarade 27 901 män och kvinnor i olika åldrar.');
