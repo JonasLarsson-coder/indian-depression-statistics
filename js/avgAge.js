@@ -6,6 +6,10 @@ import drawGoogleChart from './libs/drawGoogleChart.js';
 import makeChartFriendly from './libs/makeChartFriendly.js';
 
 addMdToPage('## Genomsnittlig ålder och depression per kön');
+addMdToPage(`Här visas den genomsnittliga åldern för män och kvinnor som deltog i den här studien, samt andel i procent som lider av depression.`)
+
+
+
 
 let avgAge = await dbQuery(`
   SELECT gender, 
