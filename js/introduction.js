@@ -1,4 +1,4 @@
 import addMdToPage from './libs/addMdToPage.js';
 
 addMdToPage('## Intro')
-addMdToPage('Statistik för psykisk ohälsa bland studenter i Indien. Hur mår dom?  I undersökningen svarade 27 901 män och kvinnor i olika åldrar.');
+addMdToPage('Statistik om psykisk ohälsa bland studenter i Indien – Hur mår de? I en omfattande undersökning deltog 27 901 studenter, både män och kvinnor i olika åldrar, för att ge en inblick i deras psykiska hälsa.Med denna stora mängd data hoppas jag kunna förstå mer om de psykologiska utmaningarna som många unga människor i Indien står inför. En av de största frågorna är om det finns specifika orsaker som har större inverkan på depression än andra. För att få en djupare förståelse har jag undersökt några av de faktorer som tros påverka studenternas psykiska välmående. Det är viktigt att betona att dessa orsaker inte är de enda som spelar en roll, utan snarare några av de många faktorer som kan bidra till att en individ utvecklar depression eller annan psykisk ohälsa.');
