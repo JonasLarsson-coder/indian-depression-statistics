@@ -6,7 +6,7 @@ import drawGoogleChart from './libs/drawGoogleChart.js';
 import makeChartFriendly from './libs/makeChartFriendly.js';
 
 addMdToPage('## Suicidal and Depression')
-addMdToPage('Statistics showing the correlation between suicidal thoughts and depression.')
+addMdToPage('Statistics showing the correlation between suicidal thoughts and depression. Undersökningen visar att personer som lider av depression och självmordstankar är större än de som inte lider av depression och självmordstankar. Det är viktigt att notera att detta inte nödvändigtvis innebär att depression orsakar självmordstankar, utan snarare att det finns en korrelation mellan de två.');
 let suicidalDepressionData = await dbQuery(`
 SELECT suicidalThoughts, 
        CASE 
@@ -72,3 +72,4 @@ try {
   console.error("Error fetching or processing data:", error);
   addMdToPage(`**Error:** ${error.message}`);
 }
+
