@@ -6,7 +6,8 @@ import makeChartFriendly from './libs/makeChartFriendly.js';
 import tableFromData from './libs/tableFromData.js';
 
 
-addMdToPage('## Sleep duration and depression')
+addMdToPage('## Sömmn & depression')
+addMdToPage(`Undersökningen visar att personer som lider av depression och sömnproblem är större än de som inte lider av depression och sömnproblem. Studenter som sover mindre än 5 timmar har mer depression än studenter som sover mer än 8 timmar. Dock är det svårt att fastställa vad "mindre än 5 timmar" innebär, det kan vara att de sover 3 timmer eller 3 1/2 timmar. Samma sak gäller för "mer än 8 timmar", det kan vara att de sover 9 timmar eller 14 timmar`);
 let sleepAndDepression = await dbQuery("SELECT sleepDuration, COUNT(*) AS total_count, SUM(CASE WHEN depression = 1 THEN 1 ELSE 0 END) AS depressed_count, CONCAT(ROUND((SUM(CASE WHEN depression = 1 THEN 1 ELSE 0 END) * 100.0) / COUNT(*),2), '%') AS depressed_percentage FROM results GROUP BY sleepDuration ORDER BY depressed_percentage DESC");
 tableFromData({ data: sleepAndDepression })
 
