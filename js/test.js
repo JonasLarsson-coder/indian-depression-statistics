@@ -4,73 +4,132 @@ import dbQuery from "./libs/dbQuery.js";
 import tableFromData from './libs/tableFromData.js';
 import drawGoogleChart from './libs/drawGoogleChart.js';
 import makeChartFriendly from './libs/makeChartFriendly.js';
-addMdToPage('## Sleep duration and depression');
 
-// Använd din SQL-query för att hämta data
-let sleepData = await dbQuery(`
-  SELECT sleepDuration, 
-         ROUND((SUM(CASE WHEN depression = 1 THEN 1 ELSE 0 END) * 100.0) / COUNT(*), 2) AS depressed_percentage
-  FROM results
-  WHERE sleepDuration != 'Others'
-  GROUP BY sleepDuration
-  ORDER BY 
-      CASE 
-          WHEN sleepDuration = 'Less than 5 hours' THEN 1
-          WHEN sleepDuration = '5-6 hours' THEN 2
-          WHEN sleepDuration = '7-8 hours' THEN 3
-          WHEN sleepDuration = 'More than 8 hours' THEN 4
-          ELSE 5
-      END;
+// Lägg till rubrik och beskrivning
+addMdToPage('## Family History of Mental Illness and Depression');
+addMdToPage('Statistik på studenters familjehistoria av psykisk ohälsa och deras depressionsstatus. Tabellen och diagramen nedan visar att studenter som har en familjehistoria av psykisk ohälsa tenderar att ha en lite högre nivå av depression jämfört med de som inte har en sådan historia. Men ändå så pass lägre att det inte är statistiskt signifikant. Det är inte en avgörande faktor för att förutsäga depression, utan snarare en av många faktorer som kan påverka en persons mentala hälsa.');
+
+// Hämta och visa tabell med summerad data
+let mentallIllnesAndDepression = await dbQuery(`
+  SELECT 
+    familyHistoryOfMentalIllnes, 
+    COUNT(*) AS total_students, 
+    SUM(depression) AS students_with_depression, 
+    ROUND((SUM(depression) * 100.0) / COUNT(*), 2) || '%' AS percentage_with_depression 
+  FROM results 
+  GROUP BY familyHistoryOfMentalIllnes;
 `);
 
-tableFromData({ data: sleepData });
+tableFromData({ data: mentallIllnesAndDepression });
 
-addMdToPage(`## The correlation between sleep duration and depression`);
+// Hämta data för diagram
+let mentalIllnessData = await dbQuery(`
+  SELECT 
+    familyHistoryOfMentalIllnes, 
+    ROUND((SUM(CASE WHEN depression = 1 THEN 1 ELSE 0 END) * 100.0) / COUNT(*), 2) AS depressed_percentage 
+  FROM results 
+  GROUP BY familyHistoryOfMentalIllnes;
+`);
 
-let formattedSleepData = sleepData.map(x => ({
-  sleepDuration: parseFloat(x.sleepDuration.match(/\d+/)?.[0] || '0'), // Extrahera numeriska värden från text
-  depressed_percentage: parseFloat(x.depressed_percentage) // FIX: Konvertera till numeriskt direkt!
+mentalIllnessData = mentalIllnessData.map(x => ({
+  ...x,
+  depressed_percentage: parseFloat(x.depressed_percentage)
 }));
 
-// Beräkna trendlinje och R²-värde med linjär regression
-function calculateTrendline(data) {
-  let x = data.map(d => d.sleepDuration);
-  let y = data.map(d => d.depressed_percentage);
-
-  let n = x.length;
-  let sumX = x.reduce((acc, val) => acc + val, 0);
-  let sumY = y.reduce((acc, val) => acc + val, 0);
-  let sumXY = x.map((val, i) => val * y[i]).reduce((acc, val) => acc + val, 0);
-  let sumX2 = x.map(val => val ** 2).reduce((acc, val) => acc + val, 0);
-
-  let slope = (n * sumXY - sumX * sumY) / (n * sumX2 - sumX ** 2);
-  let intercept = (sumY - slope * sumX) / n;
-
-  let r2_numerator = n * sumXY - sumX * sumY;
-  let r2_denominator = Math.sqrt((n * sumX2 - sumX ** 2) * (n * sumY ** 2 - sumY ** 2));
-  let r2 = (r2_denominator !== 0) ? (r2_numerator / r2_denominator) ** 2 : 0;
-
-  return { slope, intercept, r2 };
-}
-
-let { r2 } = calculateTrendline(formattedSleepData);
-
-addMdToPage(`R² value: **${r2.toFixed(2)}**  
-This indicates the strength of the correlation.`);
-
-// Visualisera med scatter-plot och trendlinje
+// Rita stapeldiagram
 drawGoogleChart({
-  type: 'ScatterChart',
-  data: makeChartFriendly(formattedSleepData, 'Sleep Duration', '% Depression'),
+  type: 'ColumnChart',
+  data: makeChartFriendly(mentalIllnessData, 'Family History of Mental Illness', 'Depressed Percentage'),
   options: {
     height: 500,
     width: 1250,
     chartArea: { left: 100, width: '75%' },
-    vAxis: { format: '#\'%\'', title: 'Percentage with depression', minValue: 0, maxValue: 100 },
-    hAxis: { title: 'Sleep Duration' },
-    title: `Depression in relation to sleep duration (excluding "Others")  
-      R² = ${r2.toFixed(2)} indicates the strength of the correlation.`,
-    trendlines: { 0: { type: 'linear', color: 'red', opacity: 0.5 } },
+    vAxis: {
+      format: '#\'%\'',
+      title: 'Percentage with Depression',
+      minValue: 0,
+      maxValue: 100
+    },
+    hAxis: {
+      title: 'Family History of Mental Illness',
+      slantedText: false
+    },
+    title: `Depression i förhållande till psykisk ohälsa i familjen.`,
     colors: ['#00a1f1']
+  }
+});
+
+
+
+
+
+// === Pearson-korrelation + scatterdiagram ===
+
+// Konvertera kategorin till binär form: Yes = 1, No = 0
+const familyHistoryBinary = mentallIllnesAndDepression.map(row => row.familyHistoryOfMentalIllnes === 'Yes' ? 1 : 0);
+
+// Extrahera andelen deprimerade som numeriska värden
+const depressionPercentages = mentallIllnesAndDepression.map(row => {
+  const percent = parseFloat(row.percentage_with_depression.replace('%', ''));
+  return isNaN(percent) ? 0 : percent;
+});
+
+// Funktion för att beräkna Pearson-korrelation
+function pearsonCorrelation(x, y) {
+  if (x.length !== y.length || x.length === 0) return NaN;
+
+  const meanX = x.reduce((a, b) => a + b) / x.length;
+  const meanY = y.reduce((a, b) => a + b) / y.length;
+
+  const numerator = x.reduce((sum, val, i) => sum + ((val - meanX) * (y[i] - meanY)), 0);
+  const denominatorX = Math.sqrt(x.reduce((sum, val) => sum + Math.pow(val - meanX, 2), 0));
+  const denominatorY = Math.sqrt(y.reduce((sum, val) => sum + Math.pow(val - meanY, 2), 0));
+
+  return (denominatorX && denominatorY) ? numerator / (denominatorX * denominatorY) : NaN;
+}
+
+// Räkna ut korrelationen
+const correlation = pearsonCorrelation(familyHistoryBinary, depressionPercentages);
+
+// Lägg till texten på sidan
+addMdToPage(`### Pearson korrelations resultat.  
+Pearson's korrelationskoefficienten mellan att ha en familjehistoria av psykisk ohälsa och procentandelen av depression är: **${correlation.toFixed(3)}**`);
+addMdToPage(`Matematiskt korrekt men statistiskt svagt – för att korrelation ska vara meningsfull krävs fler variationer i data.`)
+
+// Förbered data till scatterdiagram
+const scatterData = [['Family History (No=0, Yes=1)', 'Depressed Percentage']];
+for (let i = 0; i < familyHistoryBinary.length; i++) {
+  scatterData.push([familyHistoryBinary[i], depressionPercentages[i]]);
+}
+
+// Rita scatterdiagram med trendlinje
+drawGoogleChart({
+  type: 'ScatterChart',
+  data: scatterData,
+  options: {
+    height: 500,
+    width: 800,
+    title: `Scatter Plot: Family History vs Depression Percentage (r = ${correlation.toFixed(3)})`,
+    hAxis: {
+      title: 'Family History (No = 0, Yes = 1)',
+      ticks: [{ v: 0, f: 'No' }, { v: 1, f: 'Yes' }]
+    },
+    vAxis: {
+      title: 'Depressed Percentage (%)',
+      minValue: 0,
+      maxValue: 100
+    },
+    trendlines: {
+      0: {
+        type: 'linear',
+        color: '#e91e63',
+        lineWidth: 3,
+        opacity: 0.7,
+        showR2: true,
+        visibleInLegend: true
+      }
+    },
+    pointSize: 10,
+    colors: ['#0288d1']
   }
 });

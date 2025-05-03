@@ -6,8 +6,6 @@ Undersök olika samband/variabler påverkar deprission för ohälsa bland studen
 
 *finns det någon korrelation mellan academic pressure och depression?
 
-*Hur påverkar "financial stress" studenternas hälsa?
-
 skriv en kort text som sammanfattar varje undersökning. Visualisera med tabell, diagram, trendlinje samt R^2-värde eller Pearson test.
 avsluta med vad resultatet/diagramen säger.
 
