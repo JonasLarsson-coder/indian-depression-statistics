@@ -7,7 +7,7 @@ import makeChartFriendly from './libs/makeChartFriendly.js';
 
 // Lägg till rubrik och beskrivning
 addMdToPage('## Familjehistoria av psykisk ohälsa');
-addMdToPage('Statistik på studenters familjehistoria av psykisk ohälsa och deras depressionsstatus. Tabellen och diagramen nedan visar att studenter som har en familjehistoria av psykisk ohälsa tenderar att ha en lite högre nivå av depression jämfört med de som inte har en sådan historia. Men ändå så pass lägre att det inte är statistiskt signifikant. Det är inte en avgörande faktor för att förutsäga depression, utan snarare en av många faktorer som kan påverka en persons mentala hälsa.');
+addMdToPage('Statistik på studenters familjehistoria av psykisk ohälsa och deras depressionsstatus. Tabellen och diagramen nedan visar att studenter som har en familjehistoria av psykisk ohälsa tenderar att ha en lite högre nivå av depression jämfört med de som inte har en sådan historia. Men ändå så pass låg att det inte är statistiskt signifikant. Det är inte en avgörande faktor för att förutsäga depression, utan snarare en av många faktorer som kan påverka en persons mentala hälsa.');
 
 // Hämta och visa tabell med summerad data
 let mentallIllnesAndDepression = await dbQuery(`
