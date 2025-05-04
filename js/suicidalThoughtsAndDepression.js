@@ -6,8 +6,8 @@ import drawGoogleChart from './libs/drawGoogleChart.js';
 import makeChartFriendly from './libs/makeChartFriendly.js';
 
 // Rubrik och beskrivning
-addMdToPage('## Suicidal and Depression');
-addMdToPage('Pearsons korrelationskoefficient på 0.546 innebär en måttlig och positiv korrelation mellan självmordstankar och depression. Eftersom värdet är mellan 0 och 1, innebär detta att när depression ökar, så tenderar också självmordstankar att öka.Värdet 0.546 indikerar en måttlig styrka på sambandet. Det betyder att sambandet är synligt och signifikant, men det är inte extremt starkt. Det finns fortfarande många andra faktorer som kan påverka både depression och självmordstankar.Ett värde på 0.546 innebär inte att depression orsakar självmordstankar, utan att de tenderar att förekomma tillsammans i högre grad än vad som skulle kunna förväntas av en slump. En korrelation på 0.546 betyder att det finns ett statistiskt signifikant samband mellan självmordstankar och depression, men det är inte extremt starkt.');
+addMdToPage('## Självmordstankar och depression');
+addMdToPage('Pearsons korrelationskoefficient på 0.546 innebär en måttlig och positiv korrelation mellan självmordstankar och depression. Eftersom värdet är mellan 0 och 1, innebär detta att när depression ökar, så tenderar också självmordstankar att öka. Värdet 0.546 indikerar en måttlig styrka på sambandet. Det betyder att sambandet är synligt och signifikant, men det är inte extremt starkt. Det finns fortfarande många andra faktorer som kan påverka både depression och självmordstankar. Ett värde på 0.546 innebär inte att depression orsakar självmordstankar, utan att de tenderar att förekomma tillsammans i högre grad än vad som skulle kunna förväntas av en slump. En korrelation på 0.546 betyder att det finns ett statistiskt signifikant samband mellan självmordstankar och depression, men det är inte extremt starkt.');
 
 // Visa tabell med data
 let suicidalDepressionData = await dbQuery(`
