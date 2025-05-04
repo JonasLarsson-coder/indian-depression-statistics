@@ -12,7 +12,7 @@ let sleepAndDepression = await dbQuery("SELECT sleepDuration, COUNT(*) AS total_
 tableFromData({ data: sleepAndDepression })
 
 
-addMdToPage(`## The correlation between sleep duration and depression
+addMdToPage(`## Visualisering av antal procent som har depression i förhållande till sömnlängd
   ## 
 `);
 
@@ -41,8 +41,7 @@ drawGoogleChart({
     chartArea: { left: 100, width: '75%' },
     vAxis: { format: '#\'%\'', title: 'Percentage with depression', minValue: 0, maxValue: 100, },
     hAxis: { title: 'Sleep Duration', slantedText: false },
-    title: `Depression in relation to sleep duration (without "Others"). 
-      Students who sleep less than 5 hours tend to become more depressed.`,
+    title: `Depression i förhållande till sömnlängd (utan "Andra"). Studenter som sover mindre än 5 timmar tenderar att bli mer deprimerade.`,
     colors: ['#00a1f1', '#9455e0', '#358f1d', '#e8a220']
   }
 });
