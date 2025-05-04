@@ -1,6 +1,6 @@
 
 addMdToPage(`
-**Tolkning av Pearson - korrelation.**
+**Tolkning av Pearsons korrelation.**
 
 Den Pearsons korrelationskoefficient(r) varierar från - 1 till 1och varje värde ger en inblick i hur och hur starkt sambandet mellan två variabler är. Att förstå dessa värden hjälper till att tolka korrelationens riktning och grad.
 
@@ -14,16 +14,19 @@ Den Pearsons korrelationskoefficient(r) varierar från - 1 till 1och varje värd
 
   **Positiva, negativa och nollkorrelationer:**
 
-**Positiv korrelation**: När r är positivt(t.ex. 0, 5) innebär det att båda variablerna tenderar att röra sig i samma riktning. När temperaturen stiger kan t.ex. glassförsäljningen öka, vilket visar på en positiv korrelation.
+**Positiv korrelation**: När r är positivt(t.ex. 0,5) innebär det att båda variablerna tenderar att röra sig i samma riktning. När temperaturen stiger kan t.ex. glassförsäljningen öka, vilket visar på en positiv korrelation.
 
-**Negativ korrelation**: När r är negativt(t.ex. - 0, 7) tyder det på att variablerna rör sig i motsatt riktning. Ett exempel kan vara förhållandet mellan träningsfrekvens och kroppsfettprocent: när träningen ökar tenderar kroppsfettet att minska.
+**Negativ korrelation**: När r är negativt(t.ex. -0,7) tyder det på att variablerna rör sig i motsatt riktning. Ett exempel kan vara förhållandet mellan träningsfrekvens och kroppsfettprocent: när träningen ökar tenderar kroppsfettet att minska.
 
 **Noll korrelation**: En r av 0 innebär att det finns inget urskiljbart linjärt samband mellan variablerna. Det kan t.ex.saknas ett linjärt samband mellan skostorlek och intelligens.
 
 **I allmänhet**:
 
-0, 7 till 1 eller - 0, 7 till - 1 anger en stark korrelation.
+0,7 till 1 eller -0,7 till -1 anger en stark korrelation.
 
-0, 3 till 0, 7 eller - 0, 3 till - 0, 7 återspeglar en måttlig korrelation.
+0,3 till 0,7 eller -0,3 till -0,7 återspeglar en måttlig korrelation.
 
-0 till 0, 3 eller - 0, 3 till 0 innebär en svag korrelation.`)
+0 till 0,3 eller -0,3 till 0 innebär en svag korrelation.
+
+
+  källa:https://mindthegraph.com/blog/sv_se/pearson-correlation/`)
